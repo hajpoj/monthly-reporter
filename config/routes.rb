@@ -1,4 +1,6 @@
 MonthlyReporter::Application.routes.draw do
+  resources :work_items
+
   resources :reports
 
   resources :projects
