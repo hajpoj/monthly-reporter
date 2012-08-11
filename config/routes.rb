@@ -1,4 +1,6 @@
 MonthlyReporter::Application.routes.draw do
+  resources :reports
+
   resources :projects
 
   # The priority is based upon order of creation:

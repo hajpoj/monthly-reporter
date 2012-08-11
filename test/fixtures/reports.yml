@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  month: 1
+  year: 1
+  revenue: 1
+  expense: 1
+  note: MyText
+  project_id: 1
+
+two:
+  month: 1
+  year: 1
+  revenue: 1
+  expense: 1
+  note: MyText
+  project_id: 1
