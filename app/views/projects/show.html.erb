@@ -1,45 +1,43 @@
 <p id="notice"><%= notice %></p>
+  
+<div class="row">
+  <div class="offset2 span8">
+      <h1>
+        <%= link_to 'Projects', projects_path %> >
+        <%= @project.name %> Reports
+      </h1>
+    
+      <div class="newreportbtn pull-right">
+        <%= link_to 'New Report', new_report_path(project_id: @project.id), class: 'btn btn-success' %>
+      </div>
 
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
+      <div class="reportitem">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <th>Month / Year</th>
+            <th>Profit</th>
+          </tr>
+
+        <% @reports.each do |report| %>
+          <tr>
+            <td>
+              <%= report.month %> / <%= report.year %> 
+              ( <%= link_to report.work_items.length, report %> work items )
+
+                <%= link_to 'Edit', edit_report_path(report), class: 'btn btn-mini' %>
+                <%= link_to ' Delete', report, confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini btn-danger' %>
+
+              
+              <div class="reportdescription">
+                <h6><%= report.note %></h6>
+              </div>
+            </td>
+            <td><%= report.revenue - report.expense %></td>
+          </tr>
+        <% end %>
+        </table>
+      </div>
+  </div>
+</div>      
 
 
-
-
-<h1>Reports</h1>
-
-
-<table>
-  <tr>
-    <th>Month</th>
-    <th>Year</th>
-    <th>Revenue</th>
-    <th>Expense</th>
-    <th>Note</th>
-    <th>Project</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @reports.each do |report| %>
-  <tr>
-    <td><%= report.month %></td>
-    <td><%= report.year %></td>
-    <td><%= report.revenue %></td>
-    <td><%= report.expense %></td>
-    <td><%= report.note %></td>
-    <td><%= report.project_id %></td>
-    <td><%= link_to 'Show', report %></td>
-    <td><%= link_to 'Edit', edit_report_path(report) %></td>
-    <td><%= link_to 'Destroy', report, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<%= link_to 'new report', new_report_path(project_id: @project.id) %>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
