@@ -2,11 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.projects.index {
+.projects.index, .project.show {
   
   .projectitem {
-    
+
   }
 
+
+
+}
+
+.projects.show {
+
+  .newreportbtn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .reportdescription {
+    padding-left: 25px;
+    font-style: italic;
+  }
+
+  .reportdescription h6 {
+    text-transform: lowercase;
+  }
 
 }
