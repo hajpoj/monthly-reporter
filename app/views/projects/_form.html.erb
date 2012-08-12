@@ -11,11 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="well form-inline">
+      <%= f.text_field :name, placeholder: "Project Name..." %>
+      <%= f.submit "Add Project", class: "btn" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+ 
 <% end %>
