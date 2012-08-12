@@ -1,5 +1,6 @@
 MonthlyReporter::Application.routes.draw do
 
+  root to: 'projects#index'
 
   resources :reports do
     resources :work_items
