@@ -68,7 +68,7 @@ class WorkItemsController < ApplicationController
     respond_to do |format|
       if @work_item.update_attributes(params[:work_item])
         format.html { redirect_to @report, notice: 'Work item was successfully updated.' }
-        format.json { head :ok }
+        format.json { render json: @work_item, status: :created, location: [@report, @work_item] }
       else
         format.html { render action: "edit" }
         format.json { render json: @work_item.errors, status: :unprocessable_entity }
