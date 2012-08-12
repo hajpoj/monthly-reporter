@@ -8,7 +8,8 @@ $(function() {
     var $showForm = $('#new-work-item');
     var $form = $('#new-work-item-form');
     var $formSubmit = $form.find('.btn');
-    var $workItemsTable = $('#work-items');
+    var $workItems = $('#work-items');
+    var editTemplate = Handlebars.compile($('#work-item-edit-template').html());
 
     $showForm.on('click', function(e) {
       e.preventDefault();
@@ -28,7 +29,46 @@ $(function() {
           var source = $('#work-item-template').html();
           var template = Handlebars.compile(source);
           var html = template(data);
-          $workItemsTable.append(html);
+          $workItems.append(html);
+        }
+      });
+    });
+
+    $workItems.on('click', '.edit.btn', function(e) {
+      e.preventDefault();
+
+      var $this = $(this);
+      var $workItemRow = $this.closest('.row');
+      var $description = $workItemRow.find('.desc.span10');
+
+      var html = editTemplate({
+        description: $workItemRow.attr('data-desc'),
+        id: $workItemRow.attr('data-id'),
+        reportId: $workItemRow.attr('data-report-id')
+      });
+      $description.hide();
+      $workItemRow.prepend(html);
+    });
+
+    $workItems.on('click', '.update-item', function(e) {
+      e.preventDefault();
+
+      var $updateForm = $(this).closest('form');
+      var $workItemRow = $(this).closest('.row');
+      var $updateAction = $updateForm.attr('action');
+
+      $.ajax({
+        type: 'POST',
+        url: $updateAction,
+        data: $updateForm.serialize(),
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          var $description = $workItemRow.find('.desc.span10');
+          $description.html(data.description);
+          $description.show();
+          $updateForm.parent().remove();
+          $workItemRow.attr('data-desc', data.description);
         }
       });
     });

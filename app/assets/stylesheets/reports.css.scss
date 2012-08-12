@@ -12,4 +12,38 @@
     height: 50px;
     width: 400px;
   }
+
+  #work-items {
+    .row {
+      margin-left: 0;
+
+      div:first-child {
+        margin-left: 0;
+      }
+    }
+
+    form {
+      input {
+        margin-bottom: 0px;
+      }
+      margin-bottom: 0px;
+    }
+  }
+  [class*="span"] {
+    float: left;
+    margin-left: 20px
+  }
+
+  .work-item {
+    padding: 10px 0;
+    border-top: 1px solid #d3d3d3;
+  }
+
+  #work-items div:last-child {
+    border-bottom: 1px solid #d3d3d3;
+  }
+  #work-items div div:last-child {
+    border-bottom: none;
+  }
+
 }
