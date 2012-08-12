@@ -15,6 +15,7 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params[:id])
     @work_items = @report.work_items
+    @work_item = WorkItem.new
 
     respond_to do |format|
       format.html # show.html.erb

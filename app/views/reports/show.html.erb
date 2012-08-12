@@ -5,7 +5,7 @@
 
 <p>
   <b>Month:</b>
-  <%= @report.month %>
+  <%= Report::MONTHS.key(@report.month) %>
 </p>
 
 <p>
@@ -34,34 +34,60 @@
 </p>
 
 
-<h1>Listing work_items</h1>
+<h1>Work Items</h1>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Comment</th>
-    <th>Report</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
+<table id="work-items" class="table table-bordered">
 <% @work_items.each do |work_item| %>
   <tr>
-    <td><%= work_item.description %></td>
-    <td><%= work_item.status %></td>
-    <td><%= work_item.comment %></td>
-    <td><%= work_item.report_id %></td>
-    <td><%= link_to 'Show', [@report, work_item] %></td>
-    <td><%= link_to 'Edit', edit_report_work_item_path(@report, work_item) %></td>
-    <td><%= link_to 'Destroy', [@report, work_item], confirm: 'Are you sure?', method: :delete %></td>
+    <td class="span8">
+      <div>
+        <%= work_item.description %>
+      </div>
+    </td>
+    <td>
+      <div>
+        <%= link_to 'Edit', edit_report_work_item_path(@report, work_item) %>
+        <%= link_to 'Destroy', [@report, work_item], confirm: 'Are you sure?', method: :delete %>
+      </div>
+    </td>
   </tr>
 <% end %>
 </table>
 
+<script id="work-item-template" type="text/x-handlebars-template">
+  <tr>
+     <td class="span8">
+       <div>
+         {{ description }}
+       </div>
+     </td>
+     <td>
+       <div>
+         <a href="/reports/{{report_id}}/work_items/{{id}}/edit">Edit</a>
+         <a href="/reports/{{report_id}}/work_items/{{id}}" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a>
+       </div>
+     </td>
+   </tr>
+</script>
 
-<%= link_to 'Create new Work Item', new_report_work_item_path(@report) %>
+<%= link_to new_report_work_item_path(@report), id: 'new-work-item', class: 'btn' do %>
+  <i class="icon icon-plus"></i>
+<% end %>
+
+<div class="row">
+  <div class="span6">
+    <%= form_for([@report, @work_item], html: {id: 'new-work-item-form', class: 'well'}) do |f| %>
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'description-field' %>
+      <%= f.hidden_field :report_id, value: @report.id %>
+      <%= f.submit 'Add', class: 'btn' %>
+    <% end %>
+  </div>
+</div>
+
+
+<br>
 
 <%= link_to 'Edit', edit_report_path(@report) %> |
 <%= link_to 'Back', @report.project %>

@@ -51,7 +51,7 @@ class WorkItemsController < ApplicationController
     respond_to do |format|
       if @work_item.save
         format.html { redirect_to @report, notice: 'Work item was successfully created.' }
-        format.json { render json: @work_item, status: :created, location: @work_item }
+        format.json { render json: @work_item, status: :created, location: [@report, @work_item] }
       else
         format.html { render action: "new" }
         format.json { render json: @work_item.errors, status: :unprocessable_entity }
