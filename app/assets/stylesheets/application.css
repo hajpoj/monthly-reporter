@@ -5,3 +5,11 @@
  *= require_self
  *= require_tree . 
 */
+
+.projects {
+  background: whitesmoke;
+}
+.maincontent {
+  background: white;
+  padding-top: 100px;
+}
