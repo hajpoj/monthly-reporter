@@ -7,8 +7,15 @@
         <%= @project.name %> Reports
       </h1>
     
+
+
       <div class="newreportbtn pull-right">
-        <%= link_to 'New Report', new_report_path(project_id: @project.id), class: 'btn btn-success' %>
+              <a href="#newreport-form-modal"
+                 class="btn btn-success create-event-btn"
+                 data-toggle='modal'
+                 data-backdrop="true"
+                 data-keyboard="true">Create Report</a>
+        <!--<%= link_to 'New Report', new_report_path(project_id: @project.id), class: 'btn btn-success' %>-->
       </div>
 
       <div class="reportitem">
@@ -22,12 +29,10 @@
           <tr>
             <td>
               <%= report.month %> / <%= report.year %> 
-              ( <%= link_to report.work_items.length, report %> work items )
+              ( <%= link_to "#{report.work_items.length} work items", report %> )
 
                 <%= link_to 'Edit', edit_report_path(report), class: 'btn btn-mini' %>
                 <%= link_to ' Delete', report, confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini btn-danger' %>
-
-              
               <div class="reportdescription">
                 <h6><%= report.note %></h6>
               </div>
@@ -38,6 +43,18 @@
         </table>
       </div>
   </div>
+</div>
+
+<div id="newreport-form-modal" class="modal hide fade" style="display: none; ">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h3>Create Report</h3>
+            </div>
+            <div class="modal-body">
+              <%= render :partial => 'reports/form', :locals => {:report => Report.new} %>
+            </div>
+            <div class="modal-footer">
+            </div>
 </div>      
 
 

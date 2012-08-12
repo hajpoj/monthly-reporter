@@ -16,6 +16,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @reports = @project.reports
+    @report = Report.new
+    @report.project_id = @project.id
 
     respond_to do |format|
       format.html # show.html.erb
