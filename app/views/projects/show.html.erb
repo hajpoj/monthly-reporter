@@ -6,5 +6,40 @@
 </p>
 
 
+
+
+<h1>Reports</h1>
+
+
+<table>
+  <tr>
+    <th>Month</th>
+    <th>Year</th>
+    <th>Revenue</th>
+    <th>Expense</th>
+    <th>Note</th>
+    <th>Project</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reports.each do |report| %>
+  <tr>
+    <td><%= report.month %></td>
+    <td><%= report.year %></td>
+    <td><%= report.revenue %></td>
+    <td><%= report.expense %></td>
+    <td><%= report.note %></td>
+    <td><%= report.project_id %></td>
+    <td><%= link_to 'Show', report %></td>
+    <td><%= link_to 'Edit', edit_report_path(report) %></td>
+    <td><%= link_to 'Destroy', report, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'new report', new_report_path(project_id: @project.id) %>
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

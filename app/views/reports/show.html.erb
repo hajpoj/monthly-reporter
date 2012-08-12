@@ -1,4 +1,7 @@
+
 <p id="notice"><%= notice %></p>
+
+<h1>Report</h1>
 
 <p>
   <b>Month:</b>
@@ -31,5 +34,34 @@
 </p>
 
 
+<h1>Listing work_items</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Comment</th>
+    <th>Report</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @work_items.each do |work_item| %>
+  <tr>
+    <td><%= work_item.description %></td>
+    <td><%= work_item.status %></td>
+    <td><%= work_item.comment %></td>
+    <td><%= work_item.report_id %></td>
+    <td><%= link_to 'Show', [@report, work_item] %></td>
+    <td><%= link_to 'Edit', edit_report_work_item_path(@report, work_item) %></td>
+    <td><%= link_to 'Destroy', [@report, work_item], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'Create new Work Item', new_report_work_item_path(@report) %>
+
 <%= link_to 'Edit', edit_report_path(@report) %> |
-<%= link_to 'Back', reports_path %>
+<%= link_to 'Back', @report.project %>

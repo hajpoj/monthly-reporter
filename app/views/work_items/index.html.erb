@@ -17,13 +17,14 @@
     <td><%= work_item.status %></td>
     <td><%= work_item.comment %></td>
     <td><%= work_item.report_id %></td>
-    <td><%= link_to 'Show', work_item %></td>
-    <td><%= link_to 'Edit', edit_work_item_path(work_item) %></td>
-    <td><%= link_to 'Destroy', work_item, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@report, work_item] %></td>
+    <td><%= link_to 'Edit', edit_report_work_item_path(@report, work_item) %></td>
+    <td><%= link_to 'Destroy', [@report, work_item], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Work item', new_work_item_path %>
+<%= link_to 'New Work item', new_report_work_item_path(@report) %>
+<%= link_to 'Back to report', @report %>

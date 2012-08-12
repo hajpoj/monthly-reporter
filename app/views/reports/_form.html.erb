@@ -13,28 +13,27 @@
 
   <div class="field">
     <%= f.label :month %><br />
-    <%= f.number_field :month %>
+    <%= f.select :month, Report::MONTHS %>
   </div>
   <div class="field">
     <%= f.label :year %><br />
-    <%= f.number_field :year %>
+    <%= f.select :year, Report::YEARS %>
   </div>
   <div class="field">
     <%= f.label :revenue %><br />
-    <%= f.number_field :revenue %>
+    <%= f.text_field :revenue %>
   </div>
   <div class="field">
     <%= f.label :expense %><br />
-    <%= f.number_field :expense %>
+    <%= f.text_field :expense %>
   </div>
   <div class="field">
     <%= f.label :note %><br />
     <%= f.text_area :note %>
   </div>
-  <div class="field">
-    <%= f.label :project_id %><br />
-    <%= f.number_field :project_id %>
-  </div>
+
+  <%= f.hidden_field :project_id %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
