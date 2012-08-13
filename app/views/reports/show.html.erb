@@ -35,38 +35,21 @@
 
 <h1>Work Items</h1>
 
-<div id="work-items">
-<% @work_items.each do |work_item| %>
-  <div class='row work-item'
-       data-id="<%= work_item.id %>"
-       data-desc="<%= work_item.description %>"
-       data-report-id="<%= work_item.report_id %>">
-
-    <div class="desc span10">
-      <%= work_item.description %>
-    </div>
-    <div class="span1">
-      <%= work_item.status %>
-    </div>
-    <div class="span1">
-      <%= link_to edit_report_work_item_path(@report, work_item), class: 'edit btn btn-mini' do %>
-        <i class="icon icon-edit"></i>
-      <% end %>
-      <%= link_to [@report, work_item], confirm: 'Are you sure?', class: 'btn btn-mini', method: :delete do %>
-        <i class="icon icon-trash"></i>
-      <% end %>
-    </div>
-  </div>
+<%= content_tag 'div', id: 'work-items-data', data: { workitems: @work_items} do %>
 <% end %>
-</div>
+
+<%# Work Item Template%>
 
 <script id="work-item-template" type="text/x-handlebars-template">
   <div class="row work-item"
-       data-id="{{ id }}"
-       data-desc="{{ description }}"
-       data-report-id="{{ report_id }}">
-    <div class="desc span10">
-      {{ description }}
+       data-item="{{ json this }}">
+    <div class="span10">
+      <div class="description">
+        {{ description }}
+      </div>
+      <div class="comment">
+        {{ comment }}
+      </div>
     </div>
     <div class="span1">
       {{ status }}
@@ -79,14 +62,29 @@
   </div>
 </script>
 
-<script id="work-item-edit-template" type="text/x-handlebars-template">
-  <div class="span10">
-    <form accept-charset="UTF-8" action="/reports/{{reportId}}/work_items/{{id}}" class="new_work_item" id="new_work_item" method="post">
-      <input name="_method" type="hidden" value="put">
-      <input type="text" name="work_item[description]" value="{{description}}">
-      <input id="work_item_report_id" name="work_item[report_id]" type="hidden" value="{{reportId}}">
-      <input class="update-item btn" name="commit" type="submit" value="Add">
+<script id="edit-work-item-template" type="text/x-handlebars-template">
+  <div class="row edit-work-item">
+    <form accept-charset="UTF-8" action="/reports/{{report_id}}/work_items/{{id}}" class="new_work_item" id="new_work_item" method="post">
+      <div class="span10">
+        <input name="_method" type="hidden" value="put">
+        <input name="work_item[report_id]" type="hidden" value="{{report_id}}">
+        <div class="description">
+          <textarea class="autogrow" name="work_item[description]" >{{description}}</textarea>
+        </div>
+        <div class="comment">
+          Comment: <input type="text" name="work_item[comment]" value="{{comment}}">
+        </div>
+      </div>
+      <div class="span1">
+        <%= select_tag 'work_item[status]', options_for_select(WorkItem::STATUS) %>
+        <input class="update-item btn" name="commit" type="submit" value="Save">
+      </div>
     </form>
+    <div class="span1">
+      <a href="/reports/{{report_id}}/work_items/{{id}}/edit" class='edit btn btn-mini'><i class="icon icon-edit"></i></a>
+      <a href="/reports/{{report_id}}/work_items/{{id}}" class='btn btn-mini' data-confirm="Are you sure?" data-method="delete" rel="nofollow">
+        <i class="icon icon-trash"></i></a>
+    </div>
   </div>
 </script>
 
@@ -105,8 +103,9 @@
   </div>
 </div>
 
-
 <br>
 
 <%= link_to 'Edit', edit_report_path(@report) %> |
 <%= link_to 'Back', @report.project %>
+
+<div style="height:200px;"></div>
