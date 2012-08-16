@@ -4,6 +4,27 @@
 
 .reports.show {
 
+  #green-title {
+    color: green;
+    font-weight: bold;
+  }
+
+  #yellow-title {
+    color: #b8860b;
+    text-shadow: black;
+    font-weight: bold;
+  }
+
+  #red-title {
+    color: #8b0000;
+    font-weight: bold;
+  }
+
+  #none-title {
+    font-weight:  bold;
+  }
+
+
   #new-work-item-form {
     display: none;
   }
@@ -36,10 +57,6 @@
     select {
       width: 75px;
     }
-  }
-  [class*="span"] {
-    float: left;
-    margin-left: 20px
   }
 
   .work-item, .edit-work-item {

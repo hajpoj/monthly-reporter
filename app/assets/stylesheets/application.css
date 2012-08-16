@@ -14,3 +14,12 @@
   background: white;
   padding-top: 100px;
 }
+
+footer {
+  padding: 50px;
+  text-align: center;
+}
+
+footer ul li {
+  list-style-type: none;
+}

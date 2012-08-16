@@ -1,39 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Report</h1>
+<ul class="breadcrumb">
+  <li><%= link_to @report.project.name, project_path(@report.project_id) %></li> >
+  <li class="active"><%= Report::MONTHS.key(@report.month) %>, <%= @report.year %> Report</li>
+</ul>
 
-<p>
-  <b>Month:</b>
-  <%= Report::MONTHS.key(@report.month) %>
-</p>
+<h1 class="page-header"><%= Report::MONTHS.key(@report.month) %>, <%= @report.year %> Report</h1>
 
-<p>
-  <b>Year:</b>
-  <%= @report.year %>
-</p>
+<div class="row">
+  <div class="span3">
+    <table class="table table-bordered table-striped">
+      <tbody>
+      <tr>
+        <td id="green-title" class="span2">Green</td>
+        <td id="green-sum" class="span1"></td>
+      </tr>
+      <tr>
+        <td id="yellow-title">Yellow</td>
+        <td id="yellow-sum"></td>
+      </tr>
+      <tr>
+        <td id="red-title">Red</td>
+        <td id="red-sum"></td>
+      </tr>
+      <tr>
+        <td id="none-title">None</td>
+        <td id="none-sum" ></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="span3">
+    <table class="table table-bordered table-striped">
+      <tbody>
+      <tr>
+        <td class="span2">Revenue</td>
+        <td class="span1"><%= @report.revenue %></td>
+      </tr>
+      <tr>
+        <td >Expense</td>
+        <td ><%= @report.expense %></td>
+      </tr>
+      <tr>
+        <td >Profit</td>
+        <td ><%= @report.note %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<p>
-  <b>Revenue:</b>
-  <%= @report.revenue %>
-</p>
 
-<p>
-  <b>Expense:</b>
-  <%= @report.expense %>
-</p>
-
-<p>
-  <b>Note:</b>
-  <%= @report.note %>
-</p>
-
-<p>
-  <b>Project:</b>
-  <%= @report.project_id %>
-</p>
-
-
-<h1>Work Items</h1>
+<h2>Work Items</h2>
 
 <%= content_tag 'div', id: 'work-items-data', data: { workitems: @work_items} do %>
 <% end %>
@@ -103,9 +121,6 @@
   </div>
 </div>
 
-<br>
 
-<%= link_to 'Edit', edit_report_path(@report) %> |
-<%= link_to 'Back', @report.project %>
-
-<div style="height:200px;"></div>
+<h2 class="page-header">Note</h2>
+<%= @report.note %>
