@@ -64,7 +64,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.update_attributes(params[:report])
         format.html { redirect_to @report.project, notice: 'Report was successfully updated.' }
-        format.json { head :ok }
+        format.json { render json: @report, status: :ok, location: @report }
       else
         format.html { render action: "edit" }
         format.json { render json: @report.errors, status: :unprocessable_entity }

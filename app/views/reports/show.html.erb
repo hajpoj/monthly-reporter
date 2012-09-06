@@ -8,6 +8,10 @@
 <h1 class="page-header"><%= Report::MONTHS.key(@report.month) %>, <%= @report.year %> Report</h1>
 
 <div class="row">
+
+  <%###########################################################################%>
+  <%# Status Totals %>
+
   <div class="span3">
     <table class="table table-bordered table-striped">
       <tbody>
@@ -30,32 +34,63 @@
       </tbody>
     </table>
   </div>
+
+  <%###########################################################################%>
+  <%# Revenue Expense Profit %>
+
   <div class="span3">
-    <table class="table table-bordered table-striped">
+    <table id="profit-table" class="table table-bordered table-striped">
       <tbody>
       <tr>
-        <td class="span2">Revenue</td>
-        <td class="span1"><%= @report.revenue %></td>
+        <td class="title-col">Revenue</td>
+        <td id="revenue-val" class="span1 value-col"><%= @report.revenue %></td>
+        <td id="revenue-form" class="span1">
+          <%= form_for @report do |f| %>
+            <%= f.text_field :revenue %>
+            <%= content_tag :button, type: :submit, class: "btn btn-mini" do %>
+              <i class="icon icon-save"></i>
+            <% end %>
+          <% end %>
+        </td>
+        <td class="button-col">
+          <%= link_to edit_report_path(@report), class: "btn btn-mini edit-revenue" do %>
+            <i class="icon icon-edit"></i>
+          <% end %>
+        </td>
       </tr>
       <tr>
         <td >Expense</td>
-        <td ><%= @report.expense %></td>
+        <td id="expense-val"><%= @report.expense %></td>
+        <td id="expense-form" class="span1">
+          <%= form_for @report do |f| %>
+            <%= f.text_field :expense %>
+            <%= content_tag :button, type: :submit, class: "btn btn-mini" do %>
+              <i class="icon icon-save"></i>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_report_path(@report), class: "btn btn-mini edit-expense" do %>
+            <i class="icon icon-edit"></i>
+          <% end %>
+        </td>
       </tr>
-      <tr>
-        <td >Profit</td>
-        <td ><%= @report.note %></td>
+      <tr class="profit-row">
+        <td>Profit</td>
+        <td class="profit-val"></td>
+        <td></td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-
 <h2>Work Items</h2>
 
 <%= content_tag 'div', id: 'work-items-data', data: { workitems: @work_items} do %>
 <% end %>
 
+<%###########################################################################%>
 <%# Work Item Template%>
 
 <script id="work-item-template" type="text/x-handlebars-template">
@@ -79,6 +114,9 @@
     </div>
   </div>
 </script>
+
+<%###########################################################################%>
+<%# Edit workitem template %>
 
 <script id="edit-work-item-template" type="text/x-handlebars-template">
   <div class="row edit-work-item">
@@ -106,16 +144,20 @@
   </div>
 </script>
 
+<%###########################################################################%>
+<%# Add new work item %>
+
 <%= link_to new_report_work_item_path(@report), id: 'new-work-item', class: 'btn' do %>
   <i class="icon icon-plus"></i> Add Work Item
 <% end %>
 
 <div class="row">
-  <div class="span6">
+  <div class="span10">
     <%= form_for([@report, @work_item], html: {id: 'new-work-item-form', class: 'well'}) do |f| %>
       <%= f.label :description %>
       <%= f.text_area :description, class: 'description-field' %>
       <%= f.hidden_field :report_id, value: @report.id %>
+      <br>
       <%= f.submit 'Add', class: 'btn' %>
     <% end %>
   </div>

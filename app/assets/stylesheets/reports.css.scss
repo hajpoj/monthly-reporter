@@ -4,6 +4,10 @@
 
 .reports.show {
 
+  //***************************************************************************
+  // Status Totals
+  //***************************************************************************
+
   #green-title {
     color: green;
     font-weight: bold;
@@ -24,15 +28,68 @@
     font-weight:  bold;
   }
 
+  //***************************************************************************
+  // Revenue / Expense / Profit
+  //***************************************************************************
+
+  #profit-table {
+    td:nth-child(2) {
+      text-align: right;
+    }
+
+    form {
+      margin-bottom: 0px;
+
+      input {
+        margin-bottom: 0px;
+        text-align: right;
+        width: 56px;
+        height: 10px;
+      }
+    }
+
+    .title-col {
+      width: 20%;
+    }
+
+    .value-col {
+      width:70%
+    }
+
+    .button-col {
+      width: 10%;
+    }
+
+    #revenue-val, #expense-val {
+      //display: none;
+    }
+
+    #revenue-form, #expense-form {
+      display: none;
+    }
+
+    .profit-row td {
+      border-top: 2px solid black;
+      font-weight: bold;
+    }
+  }
+
+  //***************************************************************************
+  // New Work Item
+  //***************************************************************************
 
   #new-work-item-form {
     display: none;
   }
 
   .description-field {
-    height: 50px;
-    width: 400px;
+    height: 40px;
+    width: 725px;
   }
+
+  //***************************************************************************
+  // Work Item List
+  //***************************************************************************
 
   #work-items-data {
     .row {
